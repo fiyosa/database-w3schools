@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 14/07/2024 07:56:53
+ Date: 23/07/2024 16:31:48
 */
 
 SET NAMES utf8mb4;
@@ -1240,6 +1240,7 @@ CREATE PROCEDURE `getEmployeeByOrder`()
 BEGIN
 	SELECT 
 		CONCAT(e.FirstName,' ',e.LastName) AS Name,
+		TIMESTAMPDIFF(YEAR, e.BirthDate, CURRENT_DATE) AS age,
 		IFNULL(COUNT(o.OrderID), 0) AS total_job
 	FROM employees AS e
 	LEFT JOIN orders AS o ON e.EmployeeID = o.EmployeeID
