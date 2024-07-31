@@ -21,7 +21,7 @@
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."categories";
 CREATE TABLE "public"."categories" (
-  "CategoryID" int4 NOT NULL,
+  "CategoryID" BIGSERIAL NOT NULL,
   "CategoryName" varchar(255) COLLATE "pg_catalog"."default",
   "Description" varchar(255) COLLATE "pg_catalog"."default"
 )
@@ -44,7 +44,7 @@ INSERT INTO "public"."categories" VALUES (8, 'Seafood', 'Seaweed and fish');
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."customers";
 CREATE TABLE "public"."customers" (
-  "CustomerID" int4 NOT NULL,
+  "CustomerID" BIGSERIAL NOT NULL,
   "CustomerName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
   "Address" varchar(255) COLLATE "pg_catalog"."default",
@@ -154,7 +154,7 @@ INSERT INTO "public"."customers" VALUES (91, 'Wolski', 'Zbyszek', 'ul. Filtrowa 
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."employees";
 CREATE TABLE "public"."employees" (
-  "EmployeeID" int4 NOT NULL,
+  "EmployeeID" BIGSERIAL NOT NULL,
   "LastName" varchar(255) COLLATE "pg_catalog"."default",
   "FirstName" varchar(255) COLLATE "pg_catalog"."default",
   "BirthDate" date,
@@ -182,7 +182,7 @@ INSERT INTO "public"."employees" VALUES (10, 'West', 'Adam', '1928-09-19', 'EmpI
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."order_details";
 CREATE TABLE "public"."order_details" (
-  "OrderDetailID" int4 NOT NULL,
+  "OrderDetailID" BIGSERIAL NOT NULL,
   "OrderID" int4,
   "ProductID" int4,
   "Quantity" int4
@@ -712,7 +712,7 @@ INSERT INTO "public"."order_details" VALUES (518, 10443, 28, 12);
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."orders";
 CREATE TABLE "public"."orders" (
-  "OrderID" int4 NOT NULL,
+  "OrderID" BIGSERIAL NOT NULL,
   "CustomerID" int4,
   "EmployeeID" int4,
   "OrderDate" date,
@@ -925,7 +925,7 @@ INSERT INTO "public"."orders" VALUES (10443, 66, 8, '1997-02-12', 1);
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."products";
 CREATE TABLE "public"."products" (
-  "ProductID" int4 NOT NULL,
+  "ProductID" BIGSERIAL NOT NULL,
   "ProductName" varchar(255) COLLATE "pg_catalog"."default",
   "SupplierID" int4,
   "CategoryID" int4,
@@ -1019,7 +1019,7 @@ INSERT INTO "public"."products" VALUES (77, 'Original Frankfurter grüne Soße',
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."shippers";
 CREATE TABLE "public"."shippers" (
-  "ShipperID" int4 NOT NULL,
+  "ShipperID" BIGSERIAL NOT NULL,
   "ShipperName" varchar(255) COLLATE "pg_catalog"."default",
   "Phone" varchar(255) COLLATE "pg_catalog"."default"
 )
@@ -1037,7 +1037,7 @@ INSERT INTO "public"."shippers" VALUES (3, 'Federal Shipping', '(503) 555-9931')
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."suppliers";
 CREATE TABLE "public"."suppliers" (
-  "SupplierID" int4 NOT NULL,
+  "SupplierID" BIGSERIAL NOT NULL,
   "SupplierName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
   "Address" varchar(255) COLLATE "pg_catalog"."default",

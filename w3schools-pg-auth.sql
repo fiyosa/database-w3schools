@@ -5,24 +5,145 @@
  Source Server Type    : PostgreSQL
  Source Server Version : 140010 (140010)
  Source Host           : localhost:5432
- Source Catalog        : w3schools_auth
+ Source Catalog        : w3schools_auth2
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 140010 (140010)
  File Encoding         : 65001
 
- Date: 31/07/2024 08:54:24
+ Date: 31/07/2024 15:46:00
 */
 
+
+-- ----------------------------
+-- Sequence structure for auths_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."auths_id_seq";
+CREATE SEQUENCE "public"."auths_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for auths_user_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."auths_user_id_seq";
+CREATE SEQUENCE "public"."auths_user_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for categories_CategoryID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."categories_CategoryID_seq";
+CREATE SEQUENCE "public"."categories_CategoryID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for customers_CustomerID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."customers_CustomerID_seq";
+CREATE SEQUENCE "public"."customers_CustomerID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for employees_EmployeeID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."employees_EmployeeID_seq";
+CREATE SEQUENCE "public"."employees_EmployeeID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for order_details_OrderDetailID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."order_details_OrderDetailID_seq";
+CREATE SEQUENCE "public"."order_details_OrderDetailID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for orders_OrderID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."orders_OrderID_seq";
+CREATE SEQUENCE "public"."orders_OrderID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for products_ProductID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."products_ProductID_seq";
+CREATE SEQUENCE "public"."products_ProductID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for shippers_ShipperID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."shippers_ShipperID_seq";
+CREATE SEQUENCE "public"."shippers_ShipperID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for suppliers_SupplierID_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."suppliers_SupplierID_seq";
+CREATE SEQUENCE "public"."suppliers_SupplierID_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for users_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."users_id_seq";
+CREATE SEQUENCE "public"."users_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
 
 -- ----------------------------
 -- Table structure for auths
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."auths";
 CREATE TABLE "public"."auths" (
-  "id" int4 NOT NULL,
-  "user_id" int4 NOT NULL,
+  "id" int8 NOT NULL DEFAULT nextval('auths_id_seq'::regclass),
+  "user_id" int8 NOT NULL DEFAULT nextval('auths_user_id_seq'::regclass),
   "revoke" int2 NOT NULL,
   "token" varchar(255) COLLATE "pg_catalog"."default",
   "created_at" timestamp(6),
@@ -39,7 +160,7 @@ CREATE TABLE "public"."auths" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."categories";
 CREATE TABLE "public"."categories" (
-  "CategoryID" int4 NOT NULL,
+  "CategoryID" int8 NOT NULL DEFAULT nextval('"categories_CategoryID_seq"'::regclass),
   "CategoryName" varchar(255) COLLATE "pg_catalog"."default",
   "Description" varchar(255) COLLATE "pg_catalog"."default"
 )
@@ -62,7 +183,7 @@ INSERT INTO "public"."categories" VALUES (999999999, 'Seafood', 'Seaweed and fis
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."customers";
 CREATE TABLE "public"."customers" (
-  "CustomerID" int4 NOT NULL,
+  "CustomerID" int8 NOT NULL DEFAULT nextval('"customers_CustomerID_seq"'::regclass),
   "user_id" int4,
   "CustomerName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
@@ -173,7 +294,7 @@ INSERT INTO "public"."customers" VALUES (91, 106, 'Wolski', 'Zbyszek', 'ul. Filt
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."employees";
 CREATE TABLE "public"."employees" (
-  "EmployeeID" int4 NOT NULL,
+  "EmployeeID" int8 NOT NULL DEFAULT nextval('"employees_EmployeeID_seq"'::regclass),
   "user_id" int4,
   "LastName" varchar(255) COLLATE "pg_catalog"."default",
   "FirstName" varchar(255) COLLATE "pg_catalog"."default",
@@ -202,7 +323,7 @@ INSERT INTO "public"."employees" VALUES (10, 1, 'West', 'Adam', '1928-09-19', 'E
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."order_details";
 CREATE TABLE "public"."order_details" (
-  "OrderDetailID" int4 NOT NULL,
+  "OrderDetailID" int8 NOT NULL DEFAULT nextval('"order_details_OrderDetailID_seq"'::regclass),
   "OrderID" int4,
   "ProductID" int4,
   "Quantity" int4
@@ -732,7 +853,7 @@ INSERT INTO "public"."order_details" VALUES (518, 10443, 28, 12);
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."orders";
 CREATE TABLE "public"."orders" (
-  "OrderID" int4 NOT NULL,
+  "OrderID" int8 NOT NULL DEFAULT nextval('"orders_OrderID_seq"'::regclass),
   "CustomerID" int4,
   "EmployeeID" int4,
   "OrderDate" date,
@@ -945,7 +1066,7 @@ INSERT INTO "public"."orders" VALUES (10443, 66, 8, '1997-02-12', 1);
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."products";
 CREATE TABLE "public"."products" (
-  "ProductID" int4 NOT NULL,
+  "ProductID" int8 NOT NULL DEFAULT nextval('"products_ProductID_seq"'::regclass),
   "ProductName" varchar(255) COLLATE "pg_catalog"."default",
   "SupplierID" int4,
   "CategoryID" int4,
@@ -1039,7 +1160,7 @@ INSERT INTO "public"."products" VALUES (77, 'Original Frankfurter grüne Soße',
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."shippers";
 CREATE TABLE "public"."shippers" (
-  "ShipperID" int4 NOT NULL,
+  "ShipperID" int8 NOT NULL DEFAULT nextval('"shippers_ShipperID_seq"'::regclass),
   "ShipperName" varchar(255) COLLATE "pg_catalog"."default",
   "Phone" varchar(255) COLLATE "pg_catalog"."default"
 )
@@ -1057,7 +1178,7 @@ INSERT INTO "public"."shippers" VALUES (3, 'Federal Shipping', '(503) 555-9931')
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."suppliers";
 CREATE TABLE "public"."suppliers" (
-  "SupplierID" int4 NOT NULL,
+  "SupplierID" int8 NOT NULL DEFAULT nextval('"suppliers_SupplierID_seq"'::regclass),
   "user_id" int4,
   "SupplierName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
@@ -1107,7 +1228,7 @@ INSERT INTO "public"."suppliers" VALUES (29, 148, 'Forêts d''érables', 'Chanta
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."users";
 CREATE TABLE "public"."users" (
-  "id" int4 NOT NULL,
+  "id" int8 NOT NULL DEFAULT nextval('users_id_seq'::regclass),
   "username" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "email" varchar(255) COLLATE "pg_catalog"."default" NOT NULL,
   "password" varchar(255) COLLATE "pg_catalog"."default",
@@ -1255,6 +1376,83 @@ INSERT INTO "public"."users" VALUES (170, 'wendymackenzie', 'wendymackenzie@gmai
 INSERT INTO "public"."users" VALUES (171, 'yoshinagase', 'yoshinagase@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
 
 -- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."auths_id_seq"
+OWNED BY "public"."auths"."id";
+SELECT setval('"public"."auths_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."auths_user_id_seq"
+OWNED BY "public"."auths"."user_id";
+SELECT setval('"public"."auths_user_id_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."categories_CategoryID_seq"
+OWNED BY "public"."categories"."CategoryID";
+SELECT setval('"public"."categories_CategoryID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."customers_CustomerID_seq"
+OWNED BY "public"."customers"."CustomerID";
+SELECT setval('"public"."customers_CustomerID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."employees_EmployeeID_seq"
+OWNED BY "public"."employees"."EmployeeID";
+SELECT setval('"public"."employees_EmployeeID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."order_details_OrderDetailID_seq"
+OWNED BY "public"."order_details"."OrderDetailID";
+SELECT setval('"public"."order_details_OrderDetailID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."orders_OrderID_seq"
+OWNED BY "public"."orders"."OrderID";
+SELECT setval('"public"."orders_OrderID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."products_ProductID_seq"
+OWNED BY "public"."products"."ProductID";
+SELECT setval('"public"."products_ProductID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."shippers_ShipperID_seq"
+OWNED BY "public"."shippers"."ShipperID";
+SELECT setval('"public"."shippers_ShipperID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."suppliers_SupplierID_seq"
+OWNED BY "public"."suppliers"."SupplierID";
+SELECT setval('"public"."suppliers_SupplierID_seq"', 1, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."users_id_seq"
+OWNED BY "public"."users"."id";
+SELECT setval('"public"."users_id_seq"', 1, false);
+
+-- ----------------------------
 -- Primary Key structure for table categories
 -- ----------------------------
 ALTER TABLE "public"."categories" ADD CONSTRAINT "categories_pkey" PRIMARY KEY ("CategoryID");
@@ -1362,6 +1560,11 @@ CREATE UNIQUE INDEX "username_users" ON "public"."users" USING btree (
 -- Primary Key structure for table users
 -- ----------------------------
 ALTER TABLE "public"."users" ADD CONSTRAINT "users_pkey" PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Foreign Keys structure for table auths
+-- ----------------------------
+ALTER TABLE "public"."auths" ADD CONSTRAINT "auth_id" FOREIGN KEY ("user_id") REFERENCES "public"."users" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- ----------------------------
 -- Foreign Keys structure for table customers
