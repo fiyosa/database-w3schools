@@ -12,7 +12,7 @@
  Target Server Version : 140010 (140010)
  File Encoding         : 65001
 
- Date: 04/08/2024 15:29:16
+ Date: 04/08/2024 15:50:28
 */
 
 
@@ -146,8 +146,8 @@ CREATE TABLE "public"."auths" (
   "user_id" int8 NOT NULL,
   "revoke" int2 NOT NULL,
   "token" varchar(255) COLLATE "pg_catalog"."default",
-  "created_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP
+  "created_at" timestamp(0) DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(0) DEFAULT CURRENT_TIMESTAMP
 )
 ;
 
@@ -1236,8 +1236,8 @@ CREATE TABLE "public"."users" (
   "isEmployee" int2,
   "isSupplier" int2,
   "isCustomer" int2,
-  "created_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP
+  "created_at" timestamp(0) DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(0) DEFAULT CURRENT_TIMESTAMP
 )
 ;
 
@@ -1450,7 +1450,7 @@ SELECT setval('"public"."suppliers_SupplierID_seq"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."users_id_seq"
 OWNED BY "public"."users"."id";
-SELECT setval('"public"."users_id_seq"', 11, true);
+SELECT setval('"public"."users_id_seq"', 135, true);
 
 -- ----------------------------
 -- Primary Key structure for table categories
