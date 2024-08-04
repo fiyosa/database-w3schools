@@ -10,3 +10,6 @@ mysqldump -u root -p --routines --skip-comments w3schools > "C:\Users\fys\Downlo
 ```sh
 mysql -u [username] -p [database_name] < [file_path]
 ```
+
+## if error constraint "users_pkey"
+SELECT setval(pg_get_serial_sequence('users', 'id'), coalesce(max(id)+1, 1), false) FROM users;
