@@ -5,14 +5,14 @@
  Source Server Type    : PostgreSQL
  Source Server Version : 140010 (140010)
  Source Host           : localhost:5432
- Source Catalog        : w3schools_auth2
+ Source Catalog        : w3schools_auth
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 140010 (140010)
  File Encoding         : 65001
 
- Date: 31/07/2024 15:46:00
+ Date: 04/08/2024 15:29:16
 */
 
 
@@ -143,11 +143,11 @@ CACHE 1;
 DROP TABLE IF EXISTS "public"."auths";
 CREATE TABLE "public"."auths" (
   "id" int8 NOT NULL DEFAULT nextval('auths_id_seq'::regclass),
-  "user_id" int8 NOT NULL DEFAULT nextval('auths_user_id_seq'::regclass),
+  "user_id" int8 NOT NULL,
   "revoke" int2 NOT NULL,
   "token" varchar(255) COLLATE "pg_catalog"."default",
-  "created_at" timestamp(6),
-  "updated_at" timestamp(6)
+  "created_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP
 )
 ;
 
@@ -184,7 +184,7 @@ INSERT INTO "public"."categories" VALUES (999999999, 'Seafood', 'Seaweed and fis
 DROP TABLE IF EXISTS "public"."customers";
 CREATE TABLE "public"."customers" (
   "CustomerID" int8 NOT NULL DEFAULT nextval('"customers_CustomerID_seq"'::regclass),
-  "user_id" int4,
+  "user_id" int8,
   "CustomerName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
   "Address" varchar(255) COLLATE "pg_catalog"."default",
@@ -197,97 +197,97 @@ CREATE TABLE "public"."customers" (
 -- ----------------------------
 -- Records of customers
 -- ----------------------------
-INSERT INTO "public"."customers" VALUES (1, 70, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany');
-INSERT INTO "public"."customers" VALUES (2, 18, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico');
-INSERT INTO "public"."customers" VALUES (3, 23, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico');
-INSERT INTO "public"."customers" VALUES (4, 100, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK');
-INSERT INTO "public"."customers" VALUES (5, 31, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
-INSERT INTO "public"."customers" VALUES (6, 45, 'Blauer See Delikatessen', 'Hanna Moos', 'Forsterstr. 57', 'Mannheim', '68306', 'Germany');
-INSERT INTO "public"."customers" VALUES (7, 41, 'Blondel père et fils', 'Frédérique Citeaux', '24, place Kléber', 'Strasbourg', '67000', 'France');
-INSERT INTO "public"."customers" VALUES (8, 74, 'Bólido Comidas preparadas', 'Martín Sommer', 'C/ Araquil, 67', 'Madrid', '28023', 'Spain');
-INSERT INTO "public"."customers" VALUES (9, 64, 'Bon app''', 'Laurence Lebihans', '12, rue des Bouchers', 'Marseille', '13008', 'France');
-INSERT INTO "public"."customers" VALUES (10, 37, 'Bottom-Dollar Marketse', 'Elizabeth Lincoln', '23 Tsawassen Blvd.', 'Tsawassen', 'T2F 8M4', 'Canada');
-INSERT INTO "public"."customers" VALUES (11, 101, 'B''s Beverages', 'Victoria Ashworth', 'Fauntleroy Circus', 'London', 'EC2 5NT', 'UK');
-INSERT INTO "public"."customers" VALUES (12, 85, 'Cactus Comidas para llevar', 'Patricio Simpson', 'Cerrito 333', 'Buenos Aires', '1010', 'Argentina');
-INSERT INTO "public"."customers" VALUES (13, 40, 'Centro comercial Moctezuma', 'Francisco Chang', 'Sierras de Granada 9993', 'México D.F.', '05022', 'Mexico');
-INSERT INTO "public"."customers" VALUES (14, 102, 'Chop-suey Chinese', 'Yang Wang', 'Hauptstr. 29', 'Bern', '3012', 'Switzerland');
-INSERT INTO "public"."customers" VALUES (15, 89, 'Comércio Mineiro', 'Pedro Afonso', 'Av. dos Lusíadas, 23', 'São Paulo', '05432-043', 'Brazil');
-INSERT INTO "public"."customers" VALUES (16, 36, 'Consolidated Holdings', 'Elizabeth Brown', 'Berkeley Gardens 12 Brewery', 'London', 'WX1 6LT', 'UK');
-INSERT INTO "public"."customers" VALUES (17, 99, 'Drachenblut Delikatessend', 'Sven Ottlieb', 'Walserweg 21', 'Aachen', '52066', 'Germany');
-INSERT INTO "public"."customers" VALUES (18, 55, 'Du monde entier', 'Janine Labrune', '67, rue des Cinquante Otages', 'Nantes', '44000', 'France');
-INSERT INTO "public"."customers" VALUES (19, 21, 'Eastern Connection', 'Ann Devon', '35 King George', 'London', 'WX3 6FW', 'UK');
-INSERT INTO "public"."customers" VALUES (20, 96, 'Ernst Handel', 'Roland Mendel', 'Kirchgasse 6', 'Graz', '8010', 'Austria');
-INSERT INTO "public"."customers" VALUES (21, 24, 'Familia Arquibaldo', 'Aria Cruz', 'Rua Orós, 92', 'São Paulo', '05442-030', 'Brazil');
-INSERT INTO "public"."customers" VALUES (22, 33, 'FISSA Fabrica Inter. Salchichas S.A.', 'Diego Roel', 'C/ Moralzarzal, 86', 'Madrid', '28034', 'Spain');
-INSERT INTO "public"."customers" VALUES (23, 75, 'Folies gourmandes', 'Martine Rancé', '184, chaussée de Tournai', 'Lille', '59000', 'France');
-INSERT INTO "public"."customers" VALUES (24, 71, 'Folk och fä HB', 'Maria Larsson', 'Åkergatan 24', 'Bräcke', 'S-844 67', 'Sweden');
-INSERT INTO "public"."customers" VALUES (25, 90, 'Frankenversand', 'Peter Franken', 'Berliner Platz 43', 'München', '80805', 'Germany');
-INSERT INTO "public"."customers" VALUES (26, 27, 'France restauration', 'Carine Schmitt', '54, rue Royale', 'Nantes', '44000', 'France');
-INSERT INTO "public"."customers" VALUES (27, 82, 'Franchi S.p.A.', 'Paolo Accorti', 'Via Monte Bianco 34', 'Torino', '10100', 'Italy');
-INSERT INTO "public"."customers" VALUES (28, 65, 'Furia Bacalhau e Frutos do Mar', 'Lino Rodriguez', 'Jardim das rosas n. 32', 'Lisboa', '1675', 'Portugal');
-INSERT INTO "public"."customers" VALUES (29, 35, 'Galería del gastrónomo', 'Eduardo Saavedra', 'Rambla de Cataluña, 23', 'Barcelona', '08022', 'Spain');
-INSERT INTO "public"."customers" VALUES (30, 60, 'Godos Cocina Típica', 'José Pedro Freyre', 'C/ Romero, 33', 'Sevilla', '41101', 'Spain');
-INSERT INTO "public"."customers" VALUES (31, 20, 'Gourmet Lanchonetes', 'André Fonseca', 'Av. Brasil, 442', 'Campinas', '04876-786', 'Brazil');
-INSERT INTO "public"."customers" VALUES (32, 51, 'Great Lakes Food Market', 'Howard Snyder', '2732 Baker Blvd.', 'Eugene', '97403', 'USA');
-INSERT INTO "public"."customers" VALUES (33, 69, 'GROSELLA-Restaurante', 'Manuel Pereira', '5ª Ave. Los Palos Grandes', 'Caracas', '1081', 'Venezuela');
-INSERT INTO "public"."customers" VALUES (34, 73, 'Hanari Carnes', 'Mario Pontes', 'Rua do Paço, 67', 'Rio de Janeiro', '05454-876', 'Brazil');
-INSERT INTO "public"."customers" VALUES (35, 29, 'HILARIÓN-Abastos', 'Carlos Hernández', 'Carrera 22 con Ave. Carlos Soublette #8-35', 'San Cristóbal', '5022', 'Venezuela');
-INSERT INTO "public"."customers" VALUES (36, 103, 'Hungry Coyote Import Store', 'Yoshi Latimer', 'City Center Plaza 516 Main St.', 'Elgin', '97827', 'USA');
-INSERT INTO "public"."customers" VALUES (37, 84, 'Hungry Owl All-Night Grocers', 'Patricia McKenna', '8 Johnstown Road', 'Cork', '', 'Ireland');
-INSERT INTO "public"."customers" VALUES (38, 47, 'Island Trading', 'Helen Bennett', 'Garden House Crowther Way', 'Cowes', 'PO31 7PJ', 'UK');
-INSERT INTO "public"."customers" VALUES (39, 91, 'Königlich Essen', 'Philip Cramer', 'Maubelstr. 90', 'Brandenburg', '14776', 'Germany');
-INSERT INTO "public"."customers" VALUES (40, 32, 'La corne d''abondance', 'Daniel Tonini', '67, avenue de l''Europe', 'Versailles', '78000', 'France');
-INSERT INTO "public"."customers" VALUES (41, 22, 'La maison d''Asie', 'Annette Roulet', '1 rue Alsace-Lorraine', 'Toulouse', '31000', 'France');
-INSERT INTO "public"."customers" VALUES (42, 104, 'Laughing Bacchus Wine Cellars', 'Yoshi Tannamuri', '1900 Oak St.', 'Vancouver', 'V3F 2K1', 'Canada');
-INSERT INTO "public"."customers" VALUES (43, 57, 'Lazy K Kountry Store', 'John Steel', '12 Orchestra Terrace', 'Walla Walla', '99362', 'USA');
-INSERT INTO "public"."customers" VALUES (44, 93, 'Lehmanns Marktstand', 'Renate Messner', 'Magazinweg 7', 'Frankfurt a.M.', '60528', 'Germany');
-INSERT INTO "public"."customers" VALUES (45, 53, 'Let''s Stop N Shop', 'Jaime Yorres', '87 Polk St. Suite 5', 'San Francisco', '94117', 'USA');
-INSERT INTO "public"."customers" VALUES (46, 28, 'LILA-Supermercado', 'Carlos González', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 'Barquisimeto', '3508', 'Venezuela');
-INSERT INTO "public"."customers" VALUES (47, 38, 'LINO-Delicateses', 'Felipe Izquierdo', 'Ave. 5 de Mayo Porlamar', 'I. de Margarita', '4980', 'Venezuela');
-INSERT INTO "public"."customers" VALUES (48, 39, 'Lonesome Pine Restaurant', 'Fran Wilson', '89 Chiaroscuro Rd.', 'Portland', '97219', 'USA');
-INSERT INTO "public"."customers" VALUES (49, 43, 'Magazzini Alimentari Riuniti', 'Giovanni Rovelli', 'Via Ludovico il Moro 22', 'Bergamo', '24100', 'Italy');
-INSERT INTO "public"."customers" VALUES (50, 30, 'Maison Dewey', 'Catherine Dewey', 'Rue Joseph-Bens 532', 'Bruxelles', 'B-1180', 'Belgium');
-INSERT INTO "public"."customers" VALUES (51, 56, 'Mère Paillarde', 'Jean Fresnière', '43 rue St. Laurent', 'Montréal', 'H1J 1C3', 'Canada');
-INSERT INTO "public"."customers" VALUES (52, 17, 'Morgenstern Gesundkost', 'Alexander Feuer', 'Heerstr. 22', 'Leipzig', '04179', 'Germany');
-INSERT INTO "public"."customers" VALUES (53, 98, 'North/South', 'Simon Crowther', 'South House 300 Queensbridge', 'London', 'SW7 1RZ', 'UK');
-INSERT INTO "public"."customers" VALUES (54, 105, 'Océano Atlántico Ltda.', 'Yvonne Moncada', 'Ing. Gustavo Moncada 8585 Piso 20-A', 'Buenos Aires', '1010', 'Argentina');
-INSERT INTO "public"."customers" VALUES (55, 94, 'Old World Delicatessen', 'Rene Phillips', '2743 Bering St.', 'Anchorage', '99508', 'USA');
-INSERT INTO "public"."customers" VALUES (56, 49, 'Ottilies Käseladen', 'Henriette Pfalzheim', 'Mehrheimerstr. 369', 'Köln', '50739', 'Germany');
-INSERT INTO "public"."customers" VALUES (57, 72, 'Paris spécialités', 'Marie Bertrand', '265, boulevard Charonne', 'Paris', '75012', 'France');
-INSERT INTO "public"."customers" VALUES (58, 44, 'Pericles Comidas clásicas', 'Guillermo Fernández', 'Calle Dr. Jorge Cash 321', 'México D.F.', '05033', 'Mexico');
-INSERT INTO "public"."customers" VALUES (59, 42, 'Piccolo und mehr', 'Georg Pipps', 'Geislweg 14', 'Salzburg', '5020', 'Austria');
-INSERT INTO "public"."customers" VALUES (60, 52, 'Princesa Isabel Vinhoss', 'Isabel de Castro', 'Estrada da saúde n. 58', 'Lisboa', '1756', 'Portugal');
-INSERT INTO "public"."customers" VALUES (61, 26, 'Que Delícia', 'Bernardo Batista', 'Rua da Panificadora, 12', 'Rio de Janeiro', '02389-673', 'Brazil');
-INSERT INTO "public"."customers" VALUES (62, 68, 'Queen Cozinha', 'Lúcia Carvalho', 'Alameda dos Canàrios, 891', 'São Paulo', '05487-020', 'Brazil');
-INSERT INTO "public"."customers" VALUES (63, 50, 'QUICK-Stop', 'Horst Kloss', 'Taucherstraße 10', 'Cunewalde', '01307', 'Germany');
-INSERT INTO "public"."customers" VALUES (64, 97, 'Rancho grande', 'Sergio Gutiérrez', 'Av. del Libertador 900', 'Buenos Aires', '1010', 'Argentina');
-INSERT INTO "public"."customers" VALUES (65, 88, 'Rattlesnake Canyon Grocery', 'Paula Wilson', '2817 Milton Dr.', 'Albuquerque', '87110', 'USA');
-INSERT INTO "public"."customers" VALUES (66, 78, 'Reggiani Caseifici', 'Maurizio Moroni', 'Strada Provinciale 124', 'Reggio Emilia', '42100', 'Italy');
-INSERT INTO "public"."customers" VALUES (67, 54, 'Ricardo Adocicados', 'Janete Limeira', 'Av. Copacabana, 267', 'Rio de Janeiro', '02389-890', 'Brazil');
-INSERT INTO "public"."customers" VALUES (68, 79, 'Richter Supermarkt', 'Michael Holz', 'Grenzacherweg 237', 'Genève', '1203', 'Switzerland');
-INSERT INTO "public"."customers" VALUES (69, 16, 'Romero y tomillo', 'Alejandra Camino', 'Gran Vía, 1', 'Madrid', '28001', 'Spain');
-INSERT INTO "public"."customers" VALUES (70, 58, 'Santé Gourmet', 'Jonas Bergulfsen', 'Erling Skakkes gate 78', 'Stavern', '4110', 'Norway');
-INSERT INTO "public"."customers" VALUES (71, 59, 'Save-a-lot Markets', 'Jose Pavarotti', '187 Suffolk Ln.', 'Boise', '83720', 'USA');
-INSERT INTO "public"."customers" VALUES (72, 46, 'Seven Seas Imports', 'Hari Kumar', '90 Wadhurst Rd.', 'London', 'OX15 4NB', 'UK');
-INSERT INTO "public"."customers" VALUES (73, 61, 'Simons bistro', 'Jytte Petersen', 'Vinbæltet 34', 'København', '1734', 'Denmark');
-INSERT INTO "public"."customers" VALUES (74, 34, 'Spécialités du monde', 'Dominique Perrier', '25, rue Lauriston', 'Paris', '75016', 'France');
-INSERT INTO "public"."customers" VALUES (75, 25, 'Split Rail Beer & Ale', 'Art Braunschweiger', 'P.O. Box 555', 'Lander', '82520', 'USA');
-INSERT INTO "public"."customers" VALUES (76, 83, 'Suprêmes délices', 'Pascale Cartrain', 'Boulevard Tirou, 255', 'Charleroi', 'B-6000', 'Belgium');
-INSERT INTO "public"."customers" VALUES (77, 67, 'The Big Cheese', 'Liz Nixon', '89 Jefferson Way Suite 2', 'Portland', '97201', 'USA');
-INSERT INTO "public"."customers" VALUES (78, 66, 'The Cracker Box', 'Liu Wong', '55 Grizzly Peak Rd.', 'Butte', '59801', 'USA');
-INSERT INTO "public"."customers" VALUES (79, 62, 'Toms Spezialitäten', 'Karin Josephs', 'Luisenstr. 48', 'Münster', '44087', 'Germany');
-INSERT INTO "public"."customers" VALUES (80, 80, 'Tortuga Restaurante', 'Miguel Angel Paolino', 'Avda. Azteca 123', 'México D.F.', '05033', 'Mexico');
-INSERT INTO "public"."customers" VALUES (81, 19, 'Tradição Hipermercados', 'Anabela Domingues', 'Av. Inês de Castro, 414', 'São Paulo', '05634-030', 'Brazil');
-INSERT INTO "public"."customers" VALUES (82, 48, 'Trail''s Head Gourmet Provisioners', 'Helvetius Nagy', '722 DaVinci Blvd.', 'Kirkland', '98034', 'USA');
-INSERT INTO "public"."customers" VALUES (83, 81, 'Vaffeljernet', 'Palle Ibsen', 'Smagsløget 45', 'Århus', '8200', 'Denmark');
-INSERT INTO "public"."customers" VALUES (84, 76, 'Victuailles en stock', 'Mary Saveley', '2, rue du Commerce', 'Lyon', '69004', 'France');
-INSERT INTO "public"."customers" VALUES (85, 86, 'Vins et alcools Chevalier', 'Paul Henriot', '59 rue de l''Abbaye', 'Reims', '51100', 'France');
-INSERT INTO "public"."customers" VALUES (86, 95, 'Die Wandernde Kuh', 'Rita Müller', 'Adenauerallee 900', 'Stuttgart', '70563', 'Germany');
-INSERT INTO "public"."customers" VALUES (87, 92, 'Wartian Herkku', 'Pirkko Koskitalo', 'Torikatu 38', 'Oulu', '90110', 'Finland');
-INSERT INTO "public"."customers" VALUES (88, 87, 'Wellington Importadora', 'Paula Parente', 'Rua do Mercado, 12', 'Resende', '08737-363', 'Brazil');
-INSERT INTO "public"."customers" VALUES (89, 63, 'White Clover Markets', 'Karl Jablonski', '305 - 14th Ave. S. Suite 3B', 'Seattle', '98128', 'USA');
-INSERT INTO "public"."customers" VALUES (90, 77, 'Wilman Kala', 'Matti Karttunen', 'Keskuskatu 45', 'Helsinki', '21240', 'Finland');
-INSERT INTO "public"."customers" VALUES (91, 106, 'Wolski', 'Zbyszek', 'ul. Filtrowa 68', 'Walla', '01-012', 'Poland');
+INSERT INTO "public"."customers" VALUES (27, 77, 'Franchi S.p.A.', 'Paolo Accorti', 'Via Monte Bianco 34', 'Torino', '10100', 'Italy');
+INSERT INTO "public"."customers" VALUES (28, 60, 'Furia Bacalhau e Frutos do Mar', 'Lino Rodriguez', 'Jardim das rosas n. 32', 'Lisboa', '1675', 'Portugal');
+INSERT INTO "public"."customers" VALUES (29, 30, 'Galería del gastrónomo', 'Eduardo Saavedra', 'Rambla de Cataluña, 23', 'Barcelona', '08022', 'Spain');
+INSERT INTO "public"."customers" VALUES (30, 55, 'Godos Cocina Típica', 'José Pedro Freyre', 'C/ Romero, 33', 'Sevilla', '41101', 'Spain');
+INSERT INTO "public"."customers" VALUES (31, 15, 'Gourmet Lanchonetes', 'André Fonseca', 'Av. Brasil, 442', 'Campinas', '04876-786', 'Brazil');
+INSERT INTO "public"."customers" VALUES (32, 46, 'Great Lakes Food Market', 'Howard Snyder', '2732 Baker Blvd.', 'Eugene', '97403', 'USA');
+INSERT INTO "public"."customers" VALUES (33, 64, 'GROSELLA-Restaurante', 'Manuel Pereira', '5ª Ave. Los Palos Grandes', 'Caracas', '1081', 'Venezuela');
+INSERT INTO "public"."customers" VALUES (34, 68, 'Hanari Carnes', 'Mario Pontes', 'Rua do Paço, 67', 'Rio de Janeiro', '05454-876', 'Brazil');
+INSERT INTO "public"."customers" VALUES (35, 24, 'HILARIÓN-Abastos', 'Carlos Hernández', 'Carrera 22 con Ave. Carlos Soublette #8-35', 'San Cristóbal', '5022', 'Venezuela');
+INSERT INTO "public"."customers" VALUES (36, 98, 'Hungry Coyote Import Store', 'Yoshi Latimer', 'City Center Plaza 516 Main St.', 'Elgin', '97827', 'USA');
+INSERT INTO "public"."customers" VALUES (37, 79, 'Hungry Owl All-Night Grocers', 'Patricia McKenna', '8 Johnstown Road', 'Cork', '', 'Ireland');
+INSERT INTO "public"."customers" VALUES (38, 42, 'Island Trading', 'Helen Bennett', 'Garden House Crowther Way', 'Cowes', 'PO31 7PJ', 'UK');
+INSERT INTO "public"."customers" VALUES (39, 86, 'Königlich Essen', 'Philip Cramer', 'Maubelstr. 90', 'Brandenburg', '14776', 'Germany');
+INSERT INTO "public"."customers" VALUES (40, 27, 'La corne d''abondance', 'Daniel Tonini', '67, avenue de l''Europe', 'Versailles', '78000', 'France');
+INSERT INTO "public"."customers" VALUES (41, 17, 'La maison d''Asie', 'Annette Roulet', '1 rue Alsace-Lorraine', 'Toulouse', '31000', 'France');
+INSERT INTO "public"."customers" VALUES (91, 101, 'Wolski', 'Zbyszek', 'ul. Filtrowa 68', 'Walla', '01-012', 'Poland');
+INSERT INTO "public"."customers" VALUES (60, 47, 'Princesa Isabel Vinhoss', 'Isabel de Castro', 'Estrada da saúde n. 58', 'Lisboa', '1756', 'Portugal');
+INSERT INTO "public"."customers" VALUES (61, 21, 'Que Delícia', 'Bernardo Batista', 'Rua da Panificadora, 12', 'Rio de Janeiro', '02389-673', 'Brazil');
+INSERT INTO "public"."customers" VALUES (62, 63, 'Queen Cozinha', 'Lúcia Carvalho', 'Alameda dos Canàrios, 891', 'São Paulo', '05487-020', 'Brazil');
+INSERT INTO "public"."customers" VALUES (63, 45, 'QUICK-Stop', 'Horst Kloss', 'Taucherstraße 10', 'Cunewalde', '01307', 'Germany');
+INSERT INTO "public"."customers" VALUES (64, 92, 'Rancho grande', 'Sergio Gutiérrez', 'Av. del Libertador 900', 'Buenos Aires', '1010', 'Argentina');
+INSERT INTO "public"."customers" VALUES (65, 83, 'Rattlesnake Canyon Grocery', 'Paula Wilson', '2817 Milton Dr.', 'Albuquerque', '87110', 'USA');
+INSERT INTO "public"."customers" VALUES (66, 73, 'Reggiani Caseifici', 'Maurizio Moroni', 'Strada Provinciale 124', 'Reggio Emilia', '42100', 'Italy');
+INSERT INTO "public"."customers" VALUES (67, 49, 'Ricardo Adocicados', 'Janete Limeira', 'Av. Copacabana, 267', 'Rio de Janeiro', '02389-890', 'Brazil');
+INSERT INTO "public"."customers" VALUES (68, 74, 'Richter Supermarkt', 'Michael Holz', 'Grenzacherweg 237', 'Genève', '1203', 'Switzerland');
+INSERT INTO "public"."customers" VALUES (69, 11, 'Romero y tomillo', 'Alejandra Camino', 'Gran Vía, 1', 'Madrid', '28001', 'Spain');
+INSERT INTO "public"."customers" VALUES (70, 53, 'Santé Gourmet', 'Jonas Bergulfsen', 'Erling Skakkes gate 78', 'Stavern', '4110', 'Norway');
+INSERT INTO "public"."customers" VALUES (71, 54, 'Save-a-lot Markets', 'Jose Pavarotti', '187 Suffolk Ln.', 'Boise', '83720', 'USA');
+INSERT INTO "public"."customers" VALUES (72, 41, 'Seven Seas Imports', 'Hari Kumar', '90 Wadhurst Rd.', 'London', 'OX15 4NB', 'UK');
+INSERT INTO "public"."customers" VALUES (73, 56, 'Simons bistro', 'Jytte Petersen', 'Vinbæltet 34', 'København', '1734', 'Denmark');
+INSERT INTO "public"."customers" VALUES (74, 29, 'Spécialités du monde', 'Dominique Perrier', '25, rue Lauriston', 'Paris', '75016', 'France');
+INSERT INTO "public"."customers" VALUES (75, 20, 'Split Rail Beer & Ale', 'Art Braunschweiger', 'P.O. Box 555', 'Lander', '82520', 'USA');
+INSERT INTO "public"."customers" VALUES (76, 78, 'Suprêmes délices', 'Pascale Cartrain', 'Boulevard Tirou, 255', 'Charleroi', 'B-6000', 'Belgium');
+INSERT INTO "public"."customers" VALUES (77, 62, 'The Big Cheese', 'Liz Nixon', '89 Jefferson Way Suite 2', 'Portland', '97201', 'USA');
+INSERT INTO "public"."customers" VALUES (78, 61, 'The Cracker Box', 'Liu Wong', '55 Grizzly Peak Rd.', 'Butte', '59801', 'USA');
+INSERT INTO "public"."customers" VALUES (79, 57, 'Toms Spezialitäten', 'Karin Josephs', 'Luisenstr. 48', 'Münster', '44087', 'Germany');
+INSERT INTO "public"."customers" VALUES (80, 75, 'Tortuga Restaurante', 'Miguel Angel Paolino', 'Avda. Azteca 123', 'México D.F.', '05033', 'Mexico');
+INSERT INTO "public"."customers" VALUES (81, 14, 'Tradição Hipermercados', 'Anabela Domingues', 'Av. Inês de Castro, 414', 'São Paulo', '05634-030', 'Brazil');
+INSERT INTO "public"."customers" VALUES (82, 43, 'Trail''s Head Gourmet Provisioners', 'Helvetius Nagy', '722 DaVinci Blvd.', 'Kirkland', '98034', 'USA');
+INSERT INTO "public"."customers" VALUES (83, 76, 'Vaffeljernet', 'Palle Ibsen', 'Smagsløget 45', 'Århus', '8200', 'Denmark');
+INSERT INTO "public"."customers" VALUES (84, 71, 'Victuailles en stock', 'Mary Saveley', '2, rue du Commerce', 'Lyon', '69004', 'France');
+INSERT INTO "public"."customers" VALUES (85, 81, 'Vins et alcools Chevalier', 'Paul Henriot', '59 rue de l''Abbaye', 'Reims', '51100', 'France');
+INSERT INTO "public"."customers" VALUES (86, 90, 'Die Wandernde Kuh', 'Rita Müller', 'Adenauerallee 900', 'Stuttgart', '70563', 'Germany');
+INSERT INTO "public"."customers" VALUES (87, 87, 'Wartian Herkku', 'Pirkko Koskitalo', 'Torikatu 38', 'Oulu', '90110', 'Finland');
+INSERT INTO "public"."customers" VALUES (88, 82, 'Wellington Importadora', 'Paula Parente', 'Rua do Mercado, 12', 'Resende', '08737-363', 'Brazil');
+INSERT INTO "public"."customers" VALUES (89, 58, 'White Clover Markets', 'Karl Jablonski', '305 - 14th Ave. S. Suite 3B', 'Seattle', '98128', 'USA');
+INSERT INTO "public"."customers" VALUES (90, 72, 'Wilman Kala', 'Matti Karttunen', 'Keskuskatu 45', 'Helsinki', '21240', 'Finland');
+INSERT INTO "public"."customers" VALUES (1, 65, 'Alfreds Futterkiste', 'Maria Anders', 'Obere Str. 57', 'Berlin', '12209', 'Germany');
+INSERT INTO "public"."customers" VALUES (2, 13, 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico');
+INSERT INTO "public"."customers" VALUES (3, 18, 'Antonio Moreno Taquería', 'Antonio Moreno', 'Mataderos 2312', 'México D.F.', '05023', 'Mexico');
+INSERT INTO "public"."customers" VALUES (4, 95, 'Around the Horn', 'Thomas Hardy', '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK');
+INSERT INTO "public"."customers" VALUES (5, 26, 'Berglunds snabbköp', 'Christina Berglund', 'Berguvsvägen 8', 'Luleå', 'S-958 22', 'Sweden');
+INSERT INTO "public"."customers" VALUES (6, 40, 'Blauer See Delikatessen', 'Hanna Moos', 'Forsterstr. 57', 'Mannheim', '68306', 'Germany');
+INSERT INTO "public"."customers" VALUES (7, 36, 'Blondel père et fils', 'Frédérique Citeaux', '24, place Kléber', 'Strasbourg', '67000', 'France');
+INSERT INTO "public"."customers" VALUES (8, 69, 'Bólido Comidas preparadas', 'Martín Sommer', 'C/ Araquil, 67', 'Madrid', '28023', 'Spain');
+INSERT INTO "public"."customers" VALUES (9, 59, 'Bon app''', 'Laurence Lebihans', '12, rue des Bouchers', 'Marseille', '13008', 'France');
+INSERT INTO "public"."customers" VALUES (10, 32, 'Bottom-Dollar Marketse', 'Elizabeth Lincoln', '23 Tsawassen Blvd.', 'Tsawassen', 'T2F 8M4', 'Canada');
+INSERT INTO "public"."customers" VALUES (11, 96, 'B''s Beverages', 'Victoria Ashworth', 'Fauntleroy Circus', 'London', 'EC2 5NT', 'UK');
+INSERT INTO "public"."customers" VALUES (12, 80, 'Cactus Comidas para llevar', 'Patricio Simpson', 'Cerrito 333', 'Buenos Aires', '1010', 'Argentina');
+INSERT INTO "public"."customers" VALUES (13, 35, 'Centro comercial Moctezuma', 'Francisco Chang', 'Sierras de Granada 9993', 'México D.F.', '05022', 'Mexico');
+INSERT INTO "public"."customers" VALUES (14, 97, 'Chop-suey Chinese', 'Yang Wang', 'Hauptstr. 29', 'Bern', '3012', 'Switzerland');
+INSERT INTO "public"."customers" VALUES (15, 84, 'Comércio Mineiro', 'Pedro Afonso', 'Av. dos Lusíadas, 23', 'São Paulo', '05432-043', 'Brazil');
+INSERT INTO "public"."customers" VALUES (16, 31, 'Consolidated Holdings', 'Elizabeth Brown', 'Berkeley Gardens 12 Brewery', 'London', 'WX1 6LT', 'UK');
+INSERT INTO "public"."customers" VALUES (17, 94, 'Drachenblut Delikatessend', 'Sven Ottlieb', 'Walserweg 21', 'Aachen', '52066', 'Germany');
+INSERT INTO "public"."customers" VALUES (18, 50, 'Du monde entier', 'Janine Labrune', '67, rue des Cinquante Otages', 'Nantes', '44000', 'France');
+INSERT INTO "public"."customers" VALUES (19, 16, 'Eastern Connection', 'Ann Devon', '35 King George', 'London', 'WX3 6FW', 'UK');
+INSERT INTO "public"."customers" VALUES (20, 91, 'Ernst Handel', 'Roland Mendel', 'Kirchgasse 6', 'Graz', '8010', 'Austria');
+INSERT INTO "public"."customers" VALUES (21, 19, 'Familia Arquibaldo', 'Aria Cruz', 'Rua Orós, 92', 'São Paulo', '05442-030', 'Brazil');
+INSERT INTO "public"."customers" VALUES (22, 28, 'FISSA Fabrica Inter. Salchichas S.A.', 'Diego Roel', 'C/ Moralzarzal, 86', 'Madrid', '28034', 'Spain');
+INSERT INTO "public"."customers" VALUES (23, 70, 'Folies gourmandes', 'Martine Rancé', '184, chaussée de Tournai', 'Lille', '59000', 'France');
+INSERT INTO "public"."customers" VALUES (24, 66, 'Folk och fä HB', 'Maria Larsson', 'Åkergatan 24', 'Bräcke', 'S-844 67', 'Sweden');
+INSERT INTO "public"."customers" VALUES (25, 85, 'Frankenversand', 'Peter Franken', 'Berliner Platz 43', 'München', '80805', 'Germany');
+INSERT INTO "public"."customers" VALUES (26, 22, 'France restauration', 'Carine Schmitt', '54, rue Royale', 'Nantes', '44000', 'France');
+INSERT INTO "public"."customers" VALUES (42, 99, 'Laughing Bacchus Wine Cellars', 'Yoshi Tannamuri', '1900 Oak St.', 'Vancouver', 'V3F 2K1', 'Canada');
+INSERT INTO "public"."customers" VALUES (43, 52, 'Lazy K Kountry Store', 'John Steel', '12 Orchestra Terrace', 'Walla Walla', '99362', 'USA');
+INSERT INTO "public"."customers" VALUES (44, 88, 'Lehmanns Marktstand', 'Renate Messner', 'Magazinweg 7', 'Frankfurt a.M.', '60528', 'Germany');
+INSERT INTO "public"."customers" VALUES (45, 48, 'Let''s Stop N Shop', 'Jaime Yorres', '87 Polk St. Suite 5', 'San Francisco', '94117', 'USA');
+INSERT INTO "public"."customers" VALUES (46, 23, 'LILA-Supermercado', 'Carlos González', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 'Barquisimeto', '3508', 'Venezuela');
+INSERT INTO "public"."customers" VALUES (47, 33, 'LINO-Delicateses', 'Felipe Izquierdo', 'Ave. 5 de Mayo Porlamar', 'I. de Margarita', '4980', 'Venezuela');
+INSERT INTO "public"."customers" VALUES (48, 34, 'Lonesome Pine Restaurant', 'Fran Wilson', '89 Chiaroscuro Rd.', 'Portland', '97219', 'USA');
+INSERT INTO "public"."customers" VALUES (49, 38, 'Magazzini Alimentari Riuniti', 'Giovanni Rovelli', 'Via Ludovico il Moro 22', 'Bergamo', '24100', 'Italy');
+INSERT INTO "public"."customers" VALUES (50, 25, 'Maison Dewey', 'Catherine Dewey', 'Rue Joseph-Bens 532', 'Bruxelles', 'B-1180', 'Belgium');
+INSERT INTO "public"."customers" VALUES (51, 51, 'Mère Paillarde', 'Jean Fresnière', '43 rue St. Laurent', 'Montréal', 'H1J 1C3', 'Canada');
+INSERT INTO "public"."customers" VALUES (52, 12, 'Morgenstern Gesundkost', 'Alexander Feuer', 'Heerstr. 22', 'Leipzig', '04179', 'Germany');
+INSERT INTO "public"."customers" VALUES (53, 93, 'North/South', 'Simon Crowther', 'South House 300 Queensbridge', 'London', 'SW7 1RZ', 'UK');
+INSERT INTO "public"."customers" VALUES (54, 100, 'Océano Atlántico Ltda.', 'Yvonne Moncada', 'Ing. Gustavo Moncada 8585 Piso 20-A', 'Buenos Aires', '1010', 'Argentina');
+INSERT INTO "public"."customers" VALUES (55, 89, 'Old World Delicatessen', 'Rene Phillips', '2743 Bering St.', 'Anchorage', '99508', 'USA');
+INSERT INTO "public"."customers" VALUES (56, 44, 'Ottilies Käseladen', 'Henriette Pfalzheim', 'Mehrheimerstr. 369', 'Köln', '50739', 'Germany');
+INSERT INTO "public"."customers" VALUES (57, 67, 'Paris spécialités', 'Marie Bertrand', '265, boulevard Charonne', 'Paris', '75012', 'France');
+INSERT INTO "public"."customers" VALUES (58, 39, 'Pericles Comidas clásicas', 'Guillermo Fernández', 'Calle Dr. Jorge Cash 321', 'México D.F.', '05033', 'Mexico');
+INSERT INTO "public"."customers" VALUES (59, 37, 'Piccolo und mehr', 'Georg Pipps', 'Geislweg 14', 'Salzburg', '5020', 'Austria');
 
 -- ----------------------------
 -- Table structure for employees
@@ -295,7 +295,7 @@ INSERT INTO "public"."customers" VALUES (91, 106, 'Wolski', 'Zbyszek', 'ul. Filt
 DROP TABLE IF EXISTS "public"."employees";
 CREATE TABLE "public"."employees" (
   "EmployeeID" int8 NOT NULL DEFAULT nextval('"employees_EmployeeID_seq"'::regclass),
-  "user_id" int4,
+  "user_id" int8,
   "LastName" varchar(255) COLLATE "pg_catalog"."default",
   "FirstName" varchar(255) COLLATE "pg_catalog"."default",
   "BirthDate" date,
@@ -307,16 +307,16 @@ CREATE TABLE "public"."employees" (
 -- ----------------------------
 -- Records of employees
 -- ----------------------------
-INSERT INTO "public"."employees" VALUES (1, 8, 'Davolio', 'Nancy', '1968-12-08', 'EmpID1.pic', 'Education includes a BA in psychology from Colorado State University. She also completed (The Art of the Cold Call). Nancy is a member of ''Toastmasters International''.');
-INSERT INTO "public"."employees" VALUES (2, 2, 'Fuller', 'Andrew', '1952-02-19', 'EmpID2.pic', 'Andrew received his BTS commercial and a Ph.D. in international marketing from the University of Dallas. He is fluent in French and Italian and reads German. He joined the company as a sales representative, was promoted to sales manager and was then named vice president of sales. Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.');
-INSERT INTO "public"."employees" VALUES (3, 4, 'Leverling', 'Janet', '1963-08-30', 'EmpID3.pic', 'Janet has a BS degree in chemistry from Boston College). She has also completed a certificate program in food retailing management. Janet was hired as a sales associate and was promoted to sales representative.');
-INSERT INTO "public"."employees" VALUES (4, 6, 'Peacock', 'Margaret', '1958-09-19', 'EmpID4.pic', 'Margaret holds a BA in English literature from Concordia College and an MA from the American Institute of Culinary Arts. She was temporarily assigned to the London office before returning to her permanent post in Seattle.');
-INSERT INTO "public"."employees" VALUES (5, 10, 'Buchanan', 'Steven', '1955-03-04', 'EmpID5.pic', 'Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree. Upon joining the company as a sales representative, he spent 6 months in an orientation program at the Seattle office and then returned to his permanent post in London, where he was promoted to sales manager. Mr. Buchanan has completed the courses ''Successful Telemarketing'' and ''International Sales Management''. He is fluent in French.');
-INSERT INTO "public"."employees" VALUES (6, 7, 'Suyama', 'Michael', '1963-07-02', 'EmpID6.pic', 'Michael is a graduate of Sussex University (MA, economics) and the University of California at Los Angeles (MBA, marketing). He has also taken the courses ''Multi-Cultural Selling'' and ''Time Management for the Sales Professional''. He is fluent in Japanese and can read and write French, Portuguese, and Spanish.');
-INSERT INTO "public"."employees" VALUES (7, 9, 'King', 'Robert', '1960-05-29', 'EmpID7.pic', 'Robert King served in the Peace Corps and traveled extensively before completing his degree in English at the University of Michigan and then joining the company. After completing a course entitled ''Selling in Europe'', he was transferred to the London office.');
-INSERT INTO "public"."employees" VALUES (8, 5, 'Callahan', 'Laura', '1958-01-09', 'EmpID8.pic', 'Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.');
-INSERT INTO "public"."employees" VALUES (9, 3, 'Dodsworth', 'Anne', '1969-07-02', 'EmpID9.pic', 'Anne has a BA degree in English from St. Lawrence College. She is fluent in French and German.');
 INSERT INTO "public"."employees" VALUES (10, 1, 'West', 'Adam', '1928-09-19', 'EmpID10.pic', 'An old chum.');
+INSERT INTO "public"."employees" VALUES (2, 2, 'Fuller', 'Andrew', '1952-02-19', 'EmpID2.pic', 'Andrew received his BTS commercial and a Ph.D. in international marketing from the University of Dallas. He is fluent in French and Italian and reads German. He joined the company as a sales representative, was promoted to sales manager and was then named vice president of sales. Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.');
+INSERT INTO "public"."employees" VALUES (9, 3, 'Dodsworth', 'Anne', '1969-07-02', 'EmpID9.pic', 'Anne has a BA degree in English from St. Lawrence College. She is fluent in French and German.');
+INSERT INTO "public"."employees" VALUES (3, 4, 'Leverling', 'Janet', '1963-08-30', 'EmpID3.pic', 'Janet has a BS degree in chemistry from Boston College). She has also completed a certificate program in food retailing management. Janet was hired as a sales associate and was promoted to sales representative.');
+INSERT INTO "public"."employees" VALUES (8, 5, 'Callahan', 'Laura', '1958-01-09', 'EmpID8.pic', 'Laura received a BA in psychology from the University of Washington. She has also completed a course in business French. She reads and writes French.');
+INSERT INTO "public"."employees" VALUES (4, 6, 'Peacock', 'Margaret', '1958-09-19', 'EmpID4.pic', 'Margaret holds a BA in English literature from Concordia College and an MA from the American Institute of Culinary Arts. She was temporarily assigned to the London office before returning to her permanent post in Seattle.');
+INSERT INTO "public"."employees" VALUES (6, 7, 'Suyama', 'Michael', '1963-07-02', 'EmpID6.pic', 'Michael is a graduate of Sussex University (MA, economics) and the University of California at Los Angeles (MBA, marketing). He has also taken the courses ''Multi-Cultural Selling'' and ''Time Management for the Sales Professional''. He is fluent in Japanese and can read and write French, Portuguese, and Spanish.');
+INSERT INTO "public"."employees" VALUES (1, 8, 'Davolio', 'Nancy', '1968-12-08', 'EmpID1.pic', 'Education includes a BA in psychology from Colorado State University. She also completed (The Art of the Cold Call). Nancy is a member of ''Toastmasters International''.');
+INSERT INTO "public"."employees" VALUES (7, 9, 'King', 'Robert', '1960-05-29', 'EmpID7.pic', 'Robert King served in the Peace Corps and traveled extensively before completing his degree in English at the University of Michigan and then joining the company. After completing a course entitled ''Selling in Europe'', he was transferred to the London office.');
+INSERT INTO "public"."employees" VALUES (5, 10, 'Buchanan', 'Steven', '1955-03-04', 'EmpID5.pic', 'Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree. Upon joining the company as a sales representative, he spent 6 months in an orientation program at the Seattle office and then returned to his permanent post in London, where he was promoted to sales manager. Mr. Buchanan has completed the courses ''Successful Telemarketing'' and ''International Sales Management''. He is fluent in French.');
 
 -- ----------------------------
 -- Table structure for order_details
@@ -1179,7 +1179,7 @@ INSERT INTO "public"."shippers" VALUES (3, 'Federal Shipping', '(503) 555-9931')
 DROP TABLE IF EXISTS "public"."suppliers";
 CREATE TABLE "public"."suppliers" (
   "SupplierID" int8 NOT NULL DEFAULT nextval('"suppliers_SupplierID_seq"'::regclass),
-  "user_id" int4,
+  "user_id" int8,
   "SupplierName" varchar(255) COLLATE "pg_catalog"."default",
   "ContactName" varchar(255) COLLATE "pg_catalog"."default",
   "Address" varchar(255) COLLATE "pg_catalog"."default",
@@ -1193,35 +1193,35 @@ CREATE TABLE "public"."suppliers" (
 -- ----------------------------
 -- Records of suppliers
 -- ----------------------------
-INSERT INTO "public"."suppliers" VALUES (1, 149, 'Exotic Liquid', 'Charlotte Cooper', '49 Gilbert St.', 'Londona', 'EC1 4SD', 'UK', '(171) 555-2222');
-INSERT INTO "public"."suppliers" VALUES (2, 168, 'New Orleans Cajun Delights', 'Shelley Burke', 'P.O. Box 78934', 'New Orleans', '70117', 'USA', '(100) 555-4822');
-INSERT INTO "public"."suppliers" VALUES (3, 166, 'Grandma Kelly''s Homestead', 'Regina Murphy', '707 Oxford Rd.', 'Ann Arbor', '48104', 'USA', '(313) 555-5735');
-INSERT INTO "public"."suppliers" VALUES (4, 171, 'Tokyo Traders', 'Yoshi Nagase', '9-8 Sekimai Musashino-shi', 'Tokyo', '100', 'Japan', '(03) 3555-5011');
-INSERT INTO "public"."suppliers" VALUES (5, 144, 'Cooperativa de Quesos ''Las Cabras''', 'Antonio del Valle Saavedra', 'Calle del Rosal 4', 'Oviedo', '33007', 'Spain', '(98) 598 76 54');
-INSERT INTO "public"."suppliers" VALUES (6, 161, 'Mayumi''s', 'Mayumi Ohno', '92 Setsuko Chuo-ku', 'Osaka', '545', 'Japan', '(06) 431-7877');
-INSERT INTO "public"."suppliers" VALUES (7, 156, 'Pavlova, Ltd.', 'Ian Devling', '74 Rose St. Moonie Ponds', 'Melbourne', '3058', 'Australia', '(03) 444-2343');
-INSERT INTO "public"."suppliers" VALUES (8, 164, 'Specialty Biscuits, Ltd.', 'Peter Wilson', '29 King''s Way', 'Manchester', 'M14 GSD', 'UK', '(161) 555-4448');
-INSERT INTO "public"."suppliers" VALUES (9, 158, 'PB Knäckebröd AB', 'Lars Peterson', 'Kaloadagatan 13', 'Göteborg', 'S-345 67', 'Sweden', '031-987 65 43');
-INSERT INTO "public"."suppliers" VALUES (10, 146, 'Refrescos Americanas LTDA', 'Carlos Diaz', 'Av. das Americanas 12.890', 'São Paulo', '5442', 'Brazil', '(11) 555 4640');
-INSERT INTO "public"."suppliers" VALUES (11, 165, 'Heli Süßwaren GmbH & Co. KG', 'Petra Winkler', 'Tiergartenstraße 5', 'Berlin', '10785', 'Germany', '(010) 9984510');
-INSERT INTO "public"."suppliers" VALUES (12, 160, 'Plutzer Lebensmittelgroßmärkte AG', 'Martin Bein', 'Bogenallee 51', 'Frankfurt', '60439', 'Germany', '(069) 992755');
-INSERT INTO "public"."suppliers" VALUES (13, 169, 'Nord-Ost-Fisch Handelsgesellschaft mbH', 'Sven Petersen', 'Frahmredder 112a', 'Cuxhaven', '27478', 'Germany', '(04721) 8713');
-INSERT INTO "public"."suppliers" VALUES (14, 153, 'Formaggi Fortini s.r.l.', 'Elio Rossi', 'Viale Dante, 75', 'Ravenna', '48100', 'Italy', '(0544) 60323');
-INSERT INTO "public"."suppliers" VALUES (15, 145, 'Norske Meierier', 'Beate Vileid', 'Hatlevegen 5', 'Sandvika', '1320', 'Norway', '(0)2-953010');
-INSERT INTO "public"."suppliers" VALUES (16, 150, 'Bigfoot Breweries', 'Cheryl Saylor', '3400 - 8th Avenue Suite 210', 'Bend', '97101', 'USA', '(503) 555-9931');
-INSERT INTO "public"."suppliers" VALUES (17, 162, 'Svensk Sjöföda AB', 'Michael Björn', 'Brovallavägen 231', 'Stockholm', 'S-123 45', 'Sweden', '08-123 45 67');
-INSERT INTO "public"."suppliers" VALUES (18, 155, 'Aux joyeux ecclésiastiques', 'Guylène Nodier', '203, Rue des Francs-Bourgeois', 'Paris', '75004', 'France', '(1) 03.83.00.68');
-INSERT INTO "public"."suppliers" VALUES (19, 167, 'New England Seafood Cannery', 'Robb Merchant', 'Order Processing Dept. 2100 Paul Revere Blvd.', 'Boston', '02134', 'USA', '(617) 555-3267');
-INSERT INTO "public"."suppliers" VALUES (20, 147, 'Leka Trading', 'Chandra Leka', '471 Serangoon Loop, Suite #402', 'Singapore', '0512', 'Singapore', '555-8787');
-INSERT INTO "public"."suppliers" VALUES (21, 163, 'Lyngbysild', 'Niels Petersen', 'Lyngbysild Fiskebakken 10', 'Lyngby', '2800', 'Denmark', '43844108');
-INSERT INTO "public"."suppliers" VALUES (22, 151, 'Zaanse Snoepfabriek', 'Dirk Luchte', 'Verkoop Rijnweg 22', 'Zaandam', '9999 ZZ', 'Netherlands', '(12345) 1212');
-INSERT INTO "public"."suppliers" VALUES (23, 143, 'Karkki Oy', 'Anne Heikkonen', 'Valtakatu 12', 'Lappeenranta', '53120', 'Finland', '(953) 10956');
-INSERT INTO "public"."suppliers" VALUES (24, 170, 'G''day, Mate', 'Wendy Mackenzie', '170 Prince Edward Parade Hunter''s Hill', 'Sydney', '2042', 'Australia', '(02) 555-5914');
-INSERT INTO "public"."suppliers" VALUES (25, 157, 'Ma Maison', 'Jean-Guy Lauzon', '2960 Rue St. Laurent', 'Montréal', 'H1J 1C3', 'Canada', '(514) 555-9022');
-INSERT INTO "public"."suppliers" VALUES (26, 154, 'Pasta Buttini s.r.l.', 'Giovanni Giudici', 'Via dei Gelsomini, 153', 'Salerno', '84100', 'Italy', '(089) 6547665');
-INSERT INTO "public"."suppliers" VALUES (27, 159, 'Escargots Nouveaux', 'Marie Delamare', '22, rue H. Voiron', 'Montceau', '71300', 'France', '85.57.00.07');
-INSERT INTO "public"."suppliers" VALUES (28, 152, 'Gai pâturage', 'Eliane Noz', 'Bat. B 3, rue des Alpes', 'Annecy', '74000', 'France', '38.76.98.06');
-INSERT INTO "public"."suppliers" VALUES (29, 148, 'Forêts d''érables', 'Chantal Goulet', '148 rue Chasseur', 'Ste-Hyacinthe', 'J2S 7S8', 'Canada', '(514) 555-2955');
+INSERT INTO "public"."suppliers" VALUES (2, 127, 'New Orleans Cajun Delights', 'Shelley Burke', 'P.O. Box 78934', 'New Orleans', '70117', 'USA', '(100) 555-4822');
+INSERT INTO "public"."suppliers" VALUES (13, 128, 'Nord-Ost-Fisch Handelsgesellschaft mbH', 'Sven Petersen', 'Frahmredder 112a', 'Cuxhaven', '27478', 'Germany', '(04721) 8713');
+INSERT INTO "public"."suppliers" VALUES (24, 129, 'G''day, Mate', 'Wendy Mackenzie', '170 Prince Edward Parade Hunter''s Hill', 'Sydney', '2042', 'Australia', '(02) 555-5914');
+INSERT INTO "public"."suppliers" VALUES (4, 130, 'Tokyo Traders', 'Yoshi Nagase', '9-8 Sekimai Musashino-shi', 'Tokyo', '100', 'Japan', '(03) 3555-5011');
+INSERT INTO "public"."suppliers" VALUES (23, 102, 'Karkki Oy', 'Anne Heikkonen', 'Valtakatu 12', 'Lappeenranta', '53120', 'Finland', '(953) 10956');
+INSERT INTO "public"."suppliers" VALUES (5, 103, 'Cooperativa de Quesos ''Las Cabras''', 'Antonio del Valle Saavedra', 'Calle del Rosal 4', 'Oviedo', '33007', 'Spain', '(98) 598 76 54');
+INSERT INTO "public"."suppliers" VALUES (15, 104, 'Norske Meierier', 'Beate Vileid', 'Hatlevegen 5', 'Sandvika', '1320', 'Norway', '(0)2-953010');
+INSERT INTO "public"."suppliers" VALUES (10, 105, 'Refrescos Americanas LTDA', 'Carlos Diaz', 'Av. das Americanas 12.890', 'São Paulo', '5442', 'Brazil', '(11) 555 4640');
+INSERT INTO "public"."suppliers" VALUES (20, 106, 'Leka Trading', 'Chandra Leka', '471 Serangoon Loop, Suite #402', 'Singapore', '0512', 'Singapore', '555-8787');
+INSERT INTO "public"."suppliers" VALUES (29, 107, 'Forêts d''érables', 'Chantal Goulet', '148 rue Chasseur', 'Ste-Hyacinthe', 'J2S 7S8', 'Canada', '(514) 555-2955');
+INSERT INTO "public"."suppliers" VALUES (1, 108, 'Exotic Liquid', 'Charlotte Cooper', '49 Gilbert St.', 'Londona', 'EC1 4SD', 'UK', '(171) 555-2222');
+INSERT INTO "public"."suppliers" VALUES (16, 109, 'Bigfoot Breweries', 'Cheryl Saylor', '3400 - 8th Avenue Suite 210', 'Bend', '97101', 'USA', '(503) 555-9931');
+INSERT INTO "public"."suppliers" VALUES (22, 110, 'Zaanse Snoepfabriek', 'Dirk Luchte', 'Verkoop Rijnweg 22', 'Zaandam', '9999 ZZ', 'Netherlands', '(12345) 1212');
+INSERT INTO "public"."suppliers" VALUES (28, 111, 'Gai pâturage', 'Eliane Noz', 'Bat. B 3, rue des Alpes', 'Annecy', '74000', 'France', '38.76.98.06');
+INSERT INTO "public"."suppliers" VALUES (14, 112, 'Formaggi Fortini s.r.l.', 'Elio Rossi', 'Viale Dante, 75', 'Ravenna', '48100', 'Italy', '(0544) 60323');
+INSERT INTO "public"."suppliers" VALUES (26, 113, 'Pasta Buttini s.r.l.', 'Giovanni Giudici', 'Via dei Gelsomini, 153', 'Salerno', '84100', 'Italy', '(089) 6547665');
+INSERT INTO "public"."suppliers" VALUES (18, 114, 'Aux joyeux ecclésiastiques', 'Guylène Nodier', '203, Rue des Francs-Bourgeois', 'Paris', '75004', 'France', '(1) 03.83.00.68');
+INSERT INTO "public"."suppliers" VALUES (7, 115, 'Pavlova, Ltd.', 'Ian Devling', '74 Rose St. Moonie Ponds', 'Melbourne', '3058', 'Australia', '(03) 444-2343');
+INSERT INTO "public"."suppliers" VALUES (25, 116, 'Ma Maison', 'Jean-Guy Lauzon', '2960 Rue St. Laurent', 'Montréal', 'H1J 1C3', 'Canada', '(514) 555-9022');
+INSERT INTO "public"."suppliers" VALUES (9, 117, 'PB Knäckebröd AB', 'Lars Peterson', 'Kaloadagatan 13', 'Göteborg', 'S-345 67', 'Sweden', '031-987 65 43');
+INSERT INTO "public"."suppliers" VALUES (27, 118, 'Escargots Nouveaux', 'Marie Delamare', '22, rue H. Voiron', 'Montceau', '71300', 'France', '85.57.00.07');
+INSERT INTO "public"."suppliers" VALUES (12, 119, 'Plutzer Lebensmittelgroßmärkte AG', 'Martin Bein', 'Bogenallee 51', 'Frankfurt', '60439', 'Germany', '(069) 992755');
+INSERT INTO "public"."suppliers" VALUES (6, 120, 'Mayumi''s', 'Mayumi Ohno', '92 Setsuko Chuo-ku', 'Osaka', '545', 'Japan', '(06) 431-7877');
+INSERT INTO "public"."suppliers" VALUES (17, 121, 'Svensk Sjöföda AB', 'Michael Björn', 'Brovallavägen 231', 'Stockholm', 'S-123 45', 'Sweden', '08-123 45 67');
+INSERT INTO "public"."suppliers" VALUES (21, 122, 'Lyngbysild', 'Niels Petersen', 'Lyngbysild Fiskebakken 10', 'Lyngby', '2800', 'Denmark', '43844108');
+INSERT INTO "public"."suppliers" VALUES (8, 123, 'Specialty Biscuits, Ltd.', 'Peter Wilson', '29 King''s Way', 'Manchester', 'M14 GSD', 'UK', '(161) 555-4448');
+INSERT INTO "public"."suppliers" VALUES (11, 124, 'Heli Süßwaren GmbH & Co. KG', 'Petra Winkler', 'Tiergartenstraße 5', 'Berlin', '10785', 'Germany', '(010) 9984510');
+INSERT INTO "public"."suppliers" VALUES (3, 125, 'Grandma Kelly''s Homestead', 'Regina Murphy', '707 Oxford Rd.', 'Ann Arbor', '48104', 'USA', '(313) 555-5735');
+INSERT INTO "public"."suppliers" VALUES (19, 126, 'New England Seafood Cannery', 'Robb Merchant', 'Order Processing Dept. 2100 Paul Revere Blvd.', 'Boston', '02134', 'USA', '(617) 555-3267');
 
 -- ----------------------------
 -- Table structure for users
@@ -1236,8 +1236,8 @@ CREATE TABLE "public"."users" (
   "isEmployee" int2,
   "isSupplier" int2,
   "isCustomer" int2,
-  "created_at" timestamp(6),
-  "updated_at" timestamp(6)
+  "created_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp(6) DEFAULT CURRENT_TIMESTAMP
 )
 ;
 
@@ -1254,133 +1254,133 @@ INSERT INTO "public"."users" VALUES (7, 'michaelsuyama', 'michaelsuyama@gmail.co
 INSERT INTO "public"."users" VALUES (8, 'nancydavolio', 'nancydavolio@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 1, 0, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
 INSERT INTO "public"."users" VALUES (9, 'robertking', 'robertking@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 1, 0, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
 INSERT INTO "public"."users" VALUES (10, 'stevenbuchanan', 'stevenbuchanan@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 1, 0, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (16, 'alejandracamino', 'alejandracamino@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (17, 'alexanderfeuer', 'alexanderfeuer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (18, 'anatrujillo', 'anatrujillo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (19, 'anabeladomingues', 'anabeladomingues@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (20, 'andréfonseca', 'andréfonseca@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (21, 'anndevon', 'anndevon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (22, 'annetteroulet', 'annetteroulet@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (23, 'antoniomoreno', 'antoniomoreno@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (24, 'ariacruz', 'ariacruz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (25, 'artbraunschweiger', 'artbraunschweiger@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (26, 'bernardobatista', 'bernardobatista@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (27, 'carineschmitt', 'carineschmitt@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (28, 'carlosgonzález', 'carlosgonzález@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (29, 'carloshernández', 'carloshernández@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (30, 'catherinedewey', 'catherinedewey@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (31, 'christinaberglund', 'christinaberglund@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (32, 'danieltonini', 'danieltonini@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (33, 'diegoroel', 'diegoroel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (34, 'dominiqueperrier', 'dominiqueperrier@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (35, 'eduardosaavedra', 'eduardosaavedra@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (36, 'elizabethbrown', 'elizabethbrown@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (37, 'elizabethlincoln', 'elizabethlincoln@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (38, 'felipeizquierdo', 'felipeizquierdo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (39, 'franwilson', 'franwilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (40, 'franciscochang', 'franciscochang@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (41, 'frédériqueciteaux', 'frédériqueciteaux@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (42, 'georgpipps', 'georgpipps@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (43, 'giovannirovelli', 'giovannirovelli@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (44, 'guillermofernández', 'guillermofernández@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (45, 'hannamoos', 'hannamoos@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (46, 'harikumar', 'harikumar@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (47, 'helenbennett', 'helenbennett@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (48, 'helvetiusnagy', 'helvetiusnagy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (49, 'henriettepfalzheim', 'henriettepfalzheim@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (50, 'horstkloss', 'horstkloss@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (51, 'howardsnyder', 'howardsnyder@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (52, 'isabeldecastro', 'isabeldecastro@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (53, 'jaimeyorres', 'jaimeyorres@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (54, 'janetelimeira', 'janetelimeira@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (55, 'janinelabrune', 'janinelabrune@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (56, 'jeanfresnière', 'jeanfresnière@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (57, 'johnsteel', 'johnsteel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (58, 'jonasbergulfsen', 'jonasbergulfsen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (59, 'josepavarotti', 'josepavarotti@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (60, 'josépedrofreyre', 'josépedrofreyre@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (61, 'jyttepetersen', 'jyttepetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (62, 'karinjosephs', 'karinjosephs@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (63, 'karljablonski', 'karljablonski@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (64, 'laurencelebihans', 'laurencelebihans@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (65, 'linorodriguez', 'linorodriguez@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (66, 'liuwong', 'liuwong@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (67, 'liznixon', 'liznixon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (68, 'lúciacarvalho', 'lúciacarvalho@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (69, 'manuelpereira', 'manuelpereira@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (70, 'mariaanders', 'mariaanders@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (71, 'marialarsson', 'marialarsson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (72, 'mariebertrand', 'mariebertrand@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (73, 'mariopontes', 'mariopontes@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (74, 'martínsommer', 'martínsommer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (75, 'martinerancé', 'martinerancé@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (76, 'marysaveley', 'marysaveley@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (77, 'mattikarttunen', 'mattikarttunen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (78, 'mauriziomoroni', 'mauriziomoroni@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (79, 'michaelholz', 'michaelholz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (80, 'miguelangelpaolino', 'miguelangelpaolino@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (81, 'palleibsen', 'palleibsen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (82, 'paoloaccorti', 'paoloaccorti@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (83, 'pascalecartrain', 'pascalecartrain@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (84, 'patriciamckenna', 'patriciamckenna@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (85, 'patriciosimpson', 'patriciosimpson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (86, 'paulhenriot', 'paulhenriot@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (87, 'paulaparente', 'paulaparente@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (88, 'paulawilson', 'paulawilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (89, 'pedroafonso', 'pedroafonso@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (90, 'peterfranken', 'peterfranken@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (91, 'philipcramer', 'philipcramer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (92, 'pirkkokoskitalo', 'pirkkokoskitalo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (93, 'renatemessner', 'renatemessner@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (94, 'renephillips', 'renephillips@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (95, 'ritamüller', 'ritamüller@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (96, 'rolandmendel', 'rolandmendel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (97, 'sergiogutiérrez', 'sergiogutiérrez@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (98, 'simoncrowther', 'simoncrowther@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (99, 'svenottlieb', 'svenottlieb@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (100, 'thomashardy', 'thomashardy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (101, 'victoriaashworth', 'victoriaashworth@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (102, 'yangwang', 'yangwang@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (103, 'yoshilatimer', 'yoshilatimer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (104, 'yoshitannamuri', 'yoshitannamuri@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (105, 'yvonnemoncada', 'yvonnemoncada@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (106, 'zbyszek', 'zbyszek@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (143, 'anneheikkonen', 'anneheikkonen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (144, 'antoniodelvallesaavedra', 'antoniodelvallesaavedra@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (145, 'beatevileid', 'beatevileid@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (146, 'carlosdiaz', 'carlosdiaz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (147, 'chandraleka', 'chandraleka@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (148, 'chantalgoulet', 'chantalgoulet@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (149, 'charlottecooper', 'charlottecooper@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (150, 'cherylsaylor', 'cherylsaylor@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (151, 'dirkluchte', 'dirkluchte@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (152, 'elianenoz', 'elianenoz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (153, 'eliorossi', 'eliorossi@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (154, 'giovannigiudici', 'giovannigiudici@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (155, 'guylènenodier', 'guylènenodier@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (156, 'iandevling', 'iandevling@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (157, 'jean-guylauzon', 'jean-guylauzon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (158, 'larspeterson', 'larspeterson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (159, 'mariedelamare', 'mariedelamare@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (160, 'martinbein', 'martinbein@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (161, 'mayumiohno', 'mayumiohno@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (162, 'michaelbjörn', 'michaelbjörn@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (163, 'nielspetersen', 'nielspetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (164, 'peterwilson', 'peterwilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (165, 'petrawinkler', 'petrawinkler@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (166, 'reginamurphy', 'reginamurphy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (167, 'robbmerchant', 'robbmerchant@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (168, 'shelleyburke', 'shelleyburke@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (169, 'svenpetersen', 'svenpetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (170, 'wendymackenzie', 'wendymackenzie@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
-INSERT INTO "public"."users" VALUES (171, 'yoshinagase', 'yoshinagase@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (11, 'alejandracamino', 'alejandracamino@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (12, 'alexanderfeuer', 'alexanderfeuer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (13, 'anatrujillo', 'anatrujillo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (14, 'anabeladomingues', 'anabeladomingues@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (15, 'andréfonseca', 'andréfonseca@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (16, 'anndevon', 'anndevon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (17, 'annetteroulet', 'annetteroulet@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (18, 'antoniomoreno', 'antoniomoreno@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (19, 'ariacruz', 'ariacruz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (20, 'artbraunschweiger', 'artbraunschweiger@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (21, 'bernardobatista', 'bernardobatista@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (22, 'carineschmitt', 'carineschmitt@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (23, 'carlosgonzález', 'carlosgonzález@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (24, 'carloshernández', 'carloshernández@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (25, 'catherinedewey', 'catherinedewey@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (127, 'shelleyburke', 'shelleyburke@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (128, 'svenpetersen', 'svenpetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (129, 'wendymackenzie', 'wendymackenzie@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (130, 'yoshinagase', 'yoshinagase@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (26, 'christinaberglund', 'christinaberglund@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (27, 'danieltonini', 'danieltonini@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (28, 'diegoroel', 'diegoroel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (29, 'dominiqueperrier', 'dominiqueperrier@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (30, 'eduardosaavedra', 'eduardosaavedra@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (31, 'elizabethbrown', 'elizabethbrown@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (32, 'elizabethlincoln', 'elizabethlincoln@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (33, 'felipeizquierdo', 'felipeizquierdo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (34, 'franwilson', 'franwilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (35, 'franciscochang', 'franciscochang@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (36, 'frédériqueciteaux', 'frédériqueciteaux@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (37, 'georgpipps', 'georgpipps@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (38, 'giovannirovelli', 'giovannirovelli@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (39, 'guillermofernández', 'guillermofernández@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (40, 'hannamoos', 'hannamoos@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (41, 'harikumar', 'harikumar@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (42, 'helenbennett', 'helenbennett@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (43, 'helvetiusnagy', 'helvetiusnagy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (44, 'henriettepfalzheim', 'henriettepfalzheim@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (45, 'horstkloss', 'horstkloss@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (46, 'howardsnyder', 'howardsnyder@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (47, 'isabeldecastro', 'isabeldecastro@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (48, 'jaimeyorres', 'jaimeyorres@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (49, 'janetelimeira', 'janetelimeira@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (50, 'janinelabrune', 'janinelabrune@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (51, 'jeanfresnière', 'jeanfresnière@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (52, 'johnsteel', 'johnsteel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (53, 'jonasbergulfsen', 'jonasbergulfsen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (54, 'josepavarotti', 'josepavarotti@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (55, 'josépedrofreyre', 'josépedrofreyre@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (56, 'jyttepetersen', 'jyttepetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (57, 'karinjosephs', 'karinjosephs@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (58, 'karljablonski', 'karljablonski@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (59, 'laurencelebihans', 'laurencelebihans@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (60, 'linorodriguez', 'linorodriguez@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (61, 'liuwong', 'liuwong@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (62, 'liznixon', 'liznixon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (63, 'lúciacarvalho', 'lúciacarvalho@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (64, 'manuelpereira', 'manuelpereira@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (65, 'mariaanders', 'mariaanders@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (66, 'marialarsson', 'marialarsson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (67, 'mariebertrand', 'mariebertrand@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (68, 'mariopontes', 'mariopontes@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (69, 'martínsommer', 'martínsommer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (70, 'martinerancé', 'martinerancé@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (71, 'marysaveley', 'marysaveley@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (72, 'mattikarttunen', 'mattikarttunen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (73, 'mauriziomoroni', 'mauriziomoroni@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (74, 'michaelholz', 'michaelholz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (75, 'miguelangelpaolino', 'miguelangelpaolino@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (76, 'palleibsen', 'palleibsen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (77, 'paoloaccorti', 'paoloaccorti@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (78, 'pascalecartrain', 'pascalecartrain@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (79, 'patriciamckenna', 'patriciamckenna@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (80, 'patriciosimpson', 'patriciosimpson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (81, 'paulhenriot', 'paulhenriot@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (82, 'paulaparente', 'paulaparente@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (83, 'paulawilson', 'paulawilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (84, 'pedroafonso', 'pedroafonso@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (85, 'peterfranken', 'peterfranken@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (86, 'philipcramer', 'philipcramer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (87, 'pirkkokoskitalo', 'pirkkokoskitalo@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (88, 'renatemessner', 'renatemessner@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (89, 'renephillips', 'renephillips@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (90, 'ritamüller', 'ritamüller@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (91, 'rolandmendel', 'rolandmendel@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (92, 'sergiogutiérrez', 'sergiogutiérrez@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (93, 'simoncrowther', 'simoncrowther@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (94, 'svenottlieb', 'svenottlieb@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (95, 'thomashardy', 'thomashardy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (96, 'victoriaashworth', 'victoriaashworth@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (97, 'yangwang', 'yangwang@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (98, 'yoshilatimer', 'yoshilatimer@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (99, 'yoshitannamuri', 'yoshitannamuri@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (100, 'yvonnemoncada', 'yvonnemoncada@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (101, 'zbyszek', 'zbyszek@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 0, 1, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (102, 'anneheikkonen', 'anneheikkonen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (103, 'antoniodelvallesaavedra', 'antoniodelvallesaavedra@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (104, 'beatevileid', 'beatevileid@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (105, 'carlosdiaz', 'carlosdiaz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (106, 'chandraleka', 'chandraleka@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (107, 'chantalgoulet', 'chantalgoulet@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (108, 'charlottecooper', 'charlottecooper@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (109, 'cherylsaylor', 'cherylsaylor@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (110, 'dirkluchte', 'dirkluchte@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (111, 'elianenoz', 'elianenoz@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (112, 'eliorossi', 'eliorossi@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (113, 'giovannigiudici', 'giovannigiudici@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (114, 'guylènenodier', 'guylènenodier@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (115, 'iandevling', 'iandevling@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (116, 'jean-guylauzon', 'jean-guylauzon@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (117, 'larspeterson', 'larspeterson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (118, 'mariedelamare', 'mariedelamare@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (119, 'martinbein', 'martinbein@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (120, 'mayumiohno', 'mayumiohno@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (121, 'michaelbjörn', 'michaelbjörn@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (122, 'nielspetersen', 'nielspetersen@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (123, 'peterwilson', 'peterwilson@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (124, 'petrawinkler', 'petrawinkler@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (125, 'reginamurphy', 'reginamurphy@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
+INSERT INTO "public"."users" VALUES (126, 'robbmerchant', 'robbmerchant@gmail.com', '$2a$10$E1iyqanlegfBQ7S94qLB/.PjrQy3GlmzAG580gMOvMyWhhrA7CWse', 1, 0, 1, 0, '2024-07-27 12:00:00', '2024-07-27 12:00:00');
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."auths_id_seq"
 OWNED BY "public"."auths"."id";
-SELECT setval('"public"."auths_id_seq"', 1, false);
+SELECT setval('"public"."auths_id_seq"', 1, true);
 
 -- ----------------------------
 -- Alter sequences owned by
@@ -1450,7 +1450,7 @@ SELECT setval('"public"."suppliers_SupplierID_seq"', 1, false);
 -- ----------------------------
 ALTER SEQUENCE "public"."users_id_seq"
 OWNED BY "public"."users"."id";
-SELECT setval('"public"."users_id_seq"', 1, false);
+SELECT setval('"public"."users_id_seq"', 11, true);
 
 -- ----------------------------
 -- Primary Key structure for table categories
@@ -1461,7 +1461,7 @@ ALTER TABLE "public"."categories" ADD CONSTRAINT "categories_pkey" PRIMARY KEY (
 -- Indexes structure for table customers
 -- ----------------------------
 CREATE INDEX "user_id_customers" ON "public"."customers" USING btree (
-  "user_id" "pg_catalog"."int4_ops" ASC NULLS LAST
+  "user_id" "pg_catalog"."int8_ops" ASC NULLS LAST
 );
 
 -- ----------------------------
@@ -1473,7 +1473,7 @@ ALTER TABLE "public"."customers" ADD CONSTRAINT "customers_pkey" PRIMARY KEY ("C
 -- Indexes structure for table employees
 -- ----------------------------
 CREATE INDEX "user_id_employees" ON "public"."employees" USING btree (
-  "user_id" "pg_catalog"."int4_ops" ASC NULLS LAST
+  "user_id" "pg_catalog"."int8_ops" ASC NULLS LAST
 );
 
 -- ----------------------------
@@ -1538,7 +1538,7 @@ ALTER TABLE "public"."shippers" ADD CONSTRAINT "shippers_pkey" PRIMARY KEY ("Shi
 -- Indexes structure for table suppliers
 -- ----------------------------
 CREATE INDEX "user_id_suppliers" ON "public"."suppliers" USING btree (
-  "user_id" "pg_catalog"."int4_ops" ASC NULLS LAST
+  "user_id" "pg_catalog"."int8_ops" ASC NULLS LAST
 );
 
 -- ----------------------------
